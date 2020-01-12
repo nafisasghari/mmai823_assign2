@@ -14,10 +14,12 @@ print(datetime.datetime.now())
 path = 'data/cleaned_data.csv'
 pathr = 'data/resampled.csv'
 pathr2 = 'data/resampled_borderline.csv'
+pathr3 = 'data/resampled_adasyn.csv'
+pathr4 = 'data/resampled_tomek.csv'
 randomState = 42
 
 df = pd.read_csv(path, index_col=0)
-dfr = pd.read_csv(pathr, index_col=0)
+dfr = pd.read_csv(pathr4, index_col=0)
 
 print('Import done.')
 
@@ -26,9 +28,6 @@ y = df['BK']
 yr = dfr['BK']
 X = df.drop('BK', axis=1)
 Xr = dfr.drop('BK', axis=1)
-
-# Resample data
-# resample_to_csv(X, y, random_state=randomState, path=pathr2, method='borderline')
 
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=randomState)
