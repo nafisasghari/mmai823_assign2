@@ -13,6 +13,7 @@ print(datetime.datetime.now())
 
 path = 'data/cleaned_data.csv'
 pathr = 'data/resampled.csv'
+pathr2 = 'data/resampled_borderline.csv'
 randomState = 42
 
 df = pd.read_csv(path, index_col=0)
@@ -27,22 +28,22 @@ X = df.drop('BK', axis=1)
 Xr = dfr.drop('BK', axis=1)
 
 # Resample data
-# resample_to_csv(X, y, randomState=42, path='data/resampled.csv')
+# resample_to_csv(X, y, random_state=randomState, path=pathr2, method='borderline')
 
 # Split data
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=randomState)
 Xr_train, Xr_test, yr_train, yr_test = train_test_split(Xr, yr, test_size=0.2, random_state=randomState)
 
 # Benchmark using regular RFC
-rf = RandomForestClassifier(n_estimators=50, random_state=randomState)
-rf.fit(X_train, y_train)
+# rf = RandomForestClassifier(n_estimators=50, random_state=randomState)
+# rf.fit(Xr_train, yr_train)
 
 # Using Resampled
 rfr = RandomForestClassifier(n_estimators=50, random_state=randomState)
 rfr.fit(Xr_train, yr_train)
 
 # Predictions
-y_pred = rf.predict(X_test)
+y_pred = rfr.predict(X_test)
 yr_pred = rfr.predict(Xr_test)
 
 # Balanced Accuracy Score
